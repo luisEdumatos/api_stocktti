@@ -10,6 +10,6 @@ public class HardwareController {
 
     @GetMapping
     public String getListHardware() {
-        return "API Test!";
+        return "API Test Hardware!";
     }
 }
