@@ -1,15 +1,26 @@
 package com.hardwareinventory.stocktti.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.hardwareinventory.stocktti.dto.MessageResponseDTO;
+import com.hardwareinventory.stocktti.entity.Hardware;
+import com.hardwareinventory.stocktti.service.HardwareService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/hardware")
 public class HardwareController {
 
-    @GetMapping
-    public String getListHardware() {
-        return "API Test Hardware!";
+    private HardwareService hardwareService;
+
+    @Autowired
+    public HardwareController(HardwareService hardwareService) {
+        this.hardwareService = hardwareService;
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO createHardware(@RequestBody Hardware hardware) {
+        return hardwareService.createHardware(hardware);
     }
 }

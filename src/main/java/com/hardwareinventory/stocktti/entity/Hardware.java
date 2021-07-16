@@ -21,7 +21,8 @@ public class Hardware {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @Column(nullable = false)

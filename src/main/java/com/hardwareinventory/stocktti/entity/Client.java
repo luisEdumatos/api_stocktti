@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,11 +32,7 @@ public class Client {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany (
-            mappedBy = "client",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "client")
     private final List<Hardware> equipment = new ArrayList<>();
 
 }
