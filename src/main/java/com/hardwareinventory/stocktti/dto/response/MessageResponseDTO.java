@@ -1,4 +1,4 @@
-package com.hardwareinventory.stocktti.dto;
+package com.hardwareinventory.stocktti.dto.response;
 
 import lombok.Builder;
 import lombok.Data;

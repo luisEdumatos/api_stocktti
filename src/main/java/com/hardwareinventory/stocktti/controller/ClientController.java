@@ -1,11 +1,13 @@
 package com.hardwareinventory.stocktti.controller;
 
-import com.hardwareinventory.stocktti.dto.MessageResponseDTO;
-import com.hardwareinventory.stocktti.entity.Client;
+import com.hardwareinventory.stocktti.dto.request.ClientDTO;
+import com.hardwareinventory.stocktti.dto.response.MessageResponseDTO;
 import com.hardwareinventory.stocktti.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/client")
@@ -20,7 +22,7 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createClient(@RequestBody Client client) {
-        return clientService.createClient(client);
+    public MessageResponseDTO createClient(@RequestBody @Valid ClientDTO clientDTO) {
+        return clientService.createClient(clientDTO);
     }
 }
