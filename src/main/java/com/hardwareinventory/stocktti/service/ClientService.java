@@ -8,6 +8,9 @@ import com.hardwareinventory.stocktti.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ClientService {
     private ClientRepository clientRepository;
@@ -26,5 +29,12 @@ public class ClientService {
                 .builder()
                 .message("Created client with ID " + savedClient.getId())
                 .build();
+    }
+
+    public List<ClientDTO> listAll() {
+        List<Client> allClients = clientRepository.findAll();
+        return allClients.stream()
+                .map(clientMapper::toDTO)
+                .collect(Collectors.toList());
     }
 }

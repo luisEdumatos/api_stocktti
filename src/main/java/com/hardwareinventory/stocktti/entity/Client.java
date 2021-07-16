@@ -1,5 +1,7 @@
 package com.hardwareinventory.stocktti.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +35,7 @@ public class Client {
     private String address;
 
     @OneToMany(mappedBy = "client")
+    @JsonIgnore
     private final List<Hardware> equipment = new ArrayList<>();
 
 }

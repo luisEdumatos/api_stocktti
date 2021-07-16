@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/hardware")
@@ -25,5 +26,10 @@ public class HardwareController {
     @ResponseStatus(HttpStatus.CREATED)
     public MessageResponseDTO createHardware(@RequestBody @Valid HardwareDTO hardwareDTO) {
         return hardwareService.createHardware(hardwareDTO);
+    }
+
+    @GetMapping
+    public List<HardwareDTO> listAll() {
+        return hardwareService.listAll();
     }
 }

@@ -1,6 +1,8 @@
 package com.hardwareinventory.stocktti.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hardwareinventory.stocktti.enums.DeviceStatusCondition;
 import com.hardwareinventory.stocktti.enums.DeviceType;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,7 @@ public class Hardware {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonIgnore
     private Client client;
 
     @Column(nullable = false)
