@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Data
@@ -21,7 +22,7 @@ public class HardwareDTO {
 
     private Long id;
 
-    @NotEmpty
+    @NotNull
     private Client client;
 
     private String deviceLocalization;
@@ -32,7 +33,7 @@ public class HardwareDTO {
     @Size(min = 5, max = 15)
     private String deviceTag;
 
-    @NotEmpty
+    @NotNull
     @Enumerated(EnumType.STRING)
     private DeviceType deviceType;
 
@@ -48,13 +49,13 @@ public class HardwareDTO {
     @Size(min = 5, max = 40)
     private String deviceSO;
 
-    @NotEmpty
+    @NotNull
     private boolean deviceSOLicensed;
 
-    @NotEmpty
+    @NotNull
     private boolean deviceOfficeLicensed;
 
-    @NotEmpty
+    @NotNull
     private boolean deviceAntivirusLicensed;
 
     @NotEmpty
@@ -77,7 +78,7 @@ public class HardwareDTO {
     @Size(min = 4, max = 10)
     private String deviceHD;
 
-    @NotEmpty
+    @NotNull
     @Enumerated(EnumType.STRING)
     private DeviceStatusCondition deviceStatusCondition;
 
