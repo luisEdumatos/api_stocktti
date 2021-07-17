@@ -3,6 +3,7 @@ package com.hardwareinventory.stocktti.controller;
 import com.hardwareinventory.stocktti.dto.request.ClientDTO;
 import com.hardwareinventory.stocktti.dto.response.MessageResponseDTO;
 import com.hardwareinventory.stocktti.exception.ClientNotFoundException;
+import com.hardwareinventory.stocktti.exception.HardwareNotFoundException;
 import com.hardwareinventory.stocktti.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,11 @@ public class ClientController {
     @GetMapping("/{id}")
     public ClientDTO findById(@PathVariable Long id) throws ClientNotFoundException {
         return clientService.findById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) throws ClientNotFoundException, HardwareNotFoundException {
+        clientService.delete(id);
     }
 }

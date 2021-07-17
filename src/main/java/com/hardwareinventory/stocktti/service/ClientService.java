@@ -5,6 +5,7 @@ import com.hardwareinventory.stocktti.dto.request.ClientDTO;
 import com.hardwareinventory.stocktti.dto.response.MessageResponseDTO;
 import com.hardwareinventory.stocktti.entity.Client;
 import com.hardwareinventory.stocktti.exception.ClientNotFoundException;
+import com.hardwareinventory.stocktti.exception.HardwareNotFoundException;
 import com.hardwareinventory.stocktti.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,6 @@ import java.util.stream.Collectors;
 @Service
 public class ClientService {
     private ClientRepository clientRepository;
-
     private final ClientMapper clientMapper = ClientMapper.INSTANCE;
 
     @Autowired
@@ -41,10 +41,21 @@ public class ClientService {
     }
 
     public ClientDTO findById(Long id) throws ClientNotFoundException {
+        Client client = verifyExists(id);
+        return clientMapper.toDTO(client);
+    }
+
+    public void delete(Long id) throws ClientNotFoundException, HardwareNotFoundException {
+        verifyExists(id);
+        clientRepository.deleteById(id);
+    }
+
+    private Client verifyExists(Long id) throws ClientNotFoundException {
         Optional<Client> optionalClient = clientRepository.findById(id);
         if (optionalClient.isEmpty()) {
             throw new ClientNotFoundException(id);
         }
-        return clientMapper.toDTO(optionalClient.get());
+        return optionalClient.get();
     }
+
 }

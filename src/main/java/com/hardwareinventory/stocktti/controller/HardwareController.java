@@ -38,4 +38,10 @@ public class HardwareController {
     public HardwareDTO findById(@PathVariable Long id) throws HardwareNotFoundException {
         return hardwareService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteById(@PathVariable Long id) throws HardwareNotFoundException {
+        hardwareService.delete(id);
+    }
 }

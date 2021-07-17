@@ -42,10 +42,21 @@ public class HardwareService {
     }
 
     public HardwareDTO findById(Long id) throws HardwareNotFoundException {
+        Hardware hardware = verifyExists(id);
+        return hardwareMapper.toDTO(hardware);
+    }
+
+    public void delete(Long id) throws HardwareNotFoundException {
+        verifyExists(id);
+        hardwareRepository.deleteById(id);
+    }
+
+    public Hardware verifyExists(Long id) throws HardwareNotFoundException {
         Optional<Hardware> optionalHardware = hardwareRepository.findById(id);
         if (optionalHardware.isEmpty()) {
             throw new HardwareNotFoundException(id);
         }
-        return hardwareMapper.toDTO(optionalHardware.get());
+        return optionalHardware.get();
     }
+
 }

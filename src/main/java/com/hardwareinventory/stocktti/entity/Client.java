@@ -34,7 +34,10 @@ public class Client {
     @Column(nullable = false)
     private String address;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(
+            mappedBy = "client",
+            cascade = CascadeType.REMOVE
+    )
     @JsonIgnore
     private final List<Hardware> equipment = new ArrayList<>();
 
