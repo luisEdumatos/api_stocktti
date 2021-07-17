@@ -4,11 +4,13 @@ import com.hardwareinventory.stocktti.dto.mapper.HardwareMapper;
 import com.hardwareinventory.stocktti.dto.request.HardwareDTO;
 import com.hardwareinventory.stocktti.dto.response.MessageResponseDTO;
 import com.hardwareinventory.stocktti.entity.Hardware;
+import com.hardwareinventory.stocktti.exception.HardwareNotFoundException;
 import com.hardwareinventory.stocktti.repository.HardwareRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,5 +39,13 @@ public class HardwareService {
         return allHardwars.stream()
                 .map(hardwareMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    public HardwareDTO findById(Long id) throws HardwareNotFoundException {
+        Optional<Hardware> optionalHardware = hardwareRepository.findById(id);
+        if (optionalHardware.isEmpty()) {
+            throw new HardwareNotFoundException(id);
+        }
+        return hardwareMapper.toDTO(optionalHardware.get());
     }
 }

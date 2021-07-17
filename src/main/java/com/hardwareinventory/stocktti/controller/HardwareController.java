@@ -3,6 +3,7 @@ package com.hardwareinventory.stocktti.controller;
 import com.hardwareinventory.stocktti.dto.request.HardwareDTO;
 import com.hardwareinventory.stocktti.dto.response.MessageResponseDTO;
 import com.hardwareinventory.stocktti.entity.Hardware;
+import com.hardwareinventory.stocktti.exception.HardwareNotFoundException;
 import com.hardwareinventory.stocktti.service.HardwareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,5 +32,10 @@ public class HardwareController {
     @GetMapping
     public List<HardwareDTO> listAll() {
         return hardwareService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public HardwareDTO findById(@PathVariable Long id) throws HardwareNotFoundException {
+        return hardwareService.findById(id);
     }
 }
