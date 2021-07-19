@@ -30,6 +30,6 @@ A API possui no caminho \src\main\resources 3 arquivos do tipo .properties que s
 
 Para utilizar a API, você deverá baixar esse repositório para sua máquina local. Você precisa ter configurado o Java JDK 11 e o Maven em sua estação. Vale ressaltar também que o projeto utiliza diversas ferramentas e frameworks, como por exemplo o Spring Web, Mapstruct, Lombok, JPA, etc. Portanto, é necessário estar atento caso ocorra um problema de dependencia que tenha que ser resolvido nas configurações de sua estação.
 
-Além disso, você utilizará o Postman para realizar as requisições Http e verificar o funcionamento prático da aplicação. 
+Além disso, você utilizará o Postman para realizar as requisições Http e verificar o funcionamento prático da aplicação. A API também já está publicada no Heroku no endereço https://stocktti.herokuapp.com/.
 
 Em caso de dúvidas, contactar o responsável por este projeto. 
