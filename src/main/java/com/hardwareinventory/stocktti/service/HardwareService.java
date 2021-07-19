@@ -26,12 +26,9 @@ public class HardwareService {
     }
 
     public MessageResponseDTO createHardware(HardwareDTO hardwareDTO) {
-        Hardware hardware = hardwareMapper.toModel(hardwareDTO);
-        Hardware savedHardware = hardwareRepository.save(hardware);
-        return MessageResponseDTO
-                .builder()
-                .message("Created hardware with ID " + savedHardware.getId())
-                .build();
+        Hardware hardwareToSave = hardwareMapper.toModel(hardwareDTO);
+        Hardware savedHardware = hardwareRepository.save(hardwareToSave);
+        return createMessageResponse(savedHardware.getId(), "Created hardware with ID ");
     }
 
     public List<HardwareDTO> listAll() {
@@ -51,7 +48,14 @@ public class HardwareService {
         hardwareRepository.deleteById(id);
     }
 
-    public Hardware verifyExists(Long id) throws HardwareNotFoundException {
+    public MessageResponseDTO updateById(Long id, HardwareDTO hardwareDTO) throws HardwareNotFoundException {
+        verifyExists(id);
+        Hardware hardwareToUpdate = hardwareMapper.toModel(hardwareDTO);
+        Hardware updatedHardware = hardwareRepository.save(hardwareToUpdate);
+        return createMessageResponse(updatedHardware.getId(), "Updated hardware with ID ");
+    }
+
+    private Hardware verifyExists(Long id) throws HardwareNotFoundException {
         Optional<Hardware> optionalHardware = hardwareRepository.findById(id);
         if (optionalHardware.isEmpty()) {
             throw new HardwareNotFoundException(id);
@@ -59,4 +63,10 @@ public class HardwareService {
         return optionalHardware.get();
     }
 
+    private MessageResponseDTO createMessageResponse(long id, String msg) {
+        return MessageResponseDTO
+                .builder()
+                .message(msg + id)
+                .build();
+    }
 }

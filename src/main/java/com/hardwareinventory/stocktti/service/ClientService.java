@@ -25,12 +25,9 @@ public class ClientService {
     }
 
     public MessageResponseDTO createClient(ClientDTO clientDTO) {
-        Client client = clientMapper.toModel(clientDTO);
-        Client savedClient = clientRepository.save(client);
-        return MessageResponseDTO
-                .builder()
-                .message("Created client with ID " + savedClient.getId())
-                .build();
+        Client clientToSave = clientMapper.toModel(clientDTO);
+        Client savedClient = clientRepository.save(clientToSave);
+        return createMessageResponse(savedClient.getId(), "Created client with ID ");
     }
 
     public List<ClientDTO> listAll() {
@@ -50,6 +47,13 @@ public class ClientService {
         clientRepository.deleteById(id);
     }
 
+    public MessageResponseDTO updateById(Long id, ClientDTO clientDTO) throws ClientNotFoundException {
+        verifyExists(id);
+        Client clientToUpdate = clientMapper.toModel(clientDTO);
+        Client updatedClient = clientRepository.save(clientToUpdate);
+        return createMessageResponse(updatedClient.getId(), "Updated client with ID ");
+    }
+
     private Client verifyExists(Long id) throws ClientNotFoundException {
         Optional<Client> optionalClient = clientRepository.findById(id);
         if (optionalClient.isEmpty()) {
@@ -58,4 +62,10 @@ public class ClientService {
         return optionalClient.get();
     }
 
+    private MessageResponseDTO createMessageResponse(Long id, String msg) {
+        return MessageResponseDTO
+                .builder()
+                .message(msg + id)
+                .build();
+    }
 }

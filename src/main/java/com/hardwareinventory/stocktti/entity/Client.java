@@ -1,15 +1,10 @@
 package com.hardwareinventory.stocktti.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.engine.internal.Cascade;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
