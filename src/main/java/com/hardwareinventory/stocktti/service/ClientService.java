@@ -7,6 +7,7 @@ import com.hardwareinventory.stocktti.entity.Client;
 import com.hardwareinventory.stocktti.exception.ClientNotFoundException;
 import com.hardwareinventory.stocktti.exception.HardwareNotFoundException;
 import com.hardwareinventory.stocktti.repository.ClientRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ClientService {
     private ClientRepository clientRepository;
     private final ClientMapper clientMapper = ClientMapper.INSTANCE;
-
-    @Autowired
-    public ClientService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
 
     public MessageResponseDTO createClient(ClientDTO clientDTO) {
         Client clientToSave = clientMapper.toModel(clientDTO);

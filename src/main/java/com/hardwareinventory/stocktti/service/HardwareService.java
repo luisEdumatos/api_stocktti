@@ -6,6 +6,7 @@ import com.hardwareinventory.stocktti.dto.response.MessageResponseDTO;
 import com.hardwareinventory.stocktti.entity.Hardware;
 import com.hardwareinventory.stocktti.exception.HardwareNotFoundException;
 import com.hardwareinventory.stocktti.repository.HardwareRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +15,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class HardwareService {
 
     private HardwareRepository hardwareRepository;
 
     private final HardwareMapper hardwareMapper = HardwareMapper.INSTANCE;
-
-    @Autowired
-    public HardwareService(HardwareRepository hardwareRepository) {
-        this.hardwareRepository = hardwareRepository;
-    }
 
     public MessageResponseDTO createHardware(HardwareDTO hardwareDTO) {
         Hardware hardwareToSave = hardwareMapper.toModel(hardwareDTO);
