@@ -47,6 +47,7 @@ public class HardwareService {
 
     public MessageResponseDTO updateById(Long id, HardwareDTO hardwareDTO) throws HardwareNotFoundException {
         verifyExists(id);
+        hardwareDTO.setId(id); //Evita passagem de ID errado pelo corpo do JSON
         Hardware hardwareToUpdate = hardwareMapper.toModel(hardwareDTO);
         Hardware updatedHardware = hardwareRepository.save(hardwareToUpdate);
         return createMessageResponse(updatedHardware.getId(), "Updated hardware with ID ");

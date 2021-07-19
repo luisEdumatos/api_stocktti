@@ -46,6 +46,7 @@ public class ClientService {
 
     public MessageResponseDTO updateById(Long id, ClientDTO clientDTO) throws ClientNotFoundException {
         verifyExists(id);
+        clientDTO.setId(id); //Evita passagem de ID errado pelo corpo do JSON
         Client clientToUpdate = clientMapper.toModel(clientDTO);
         Client updatedClient = clientRepository.save(clientToUpdate);
         return createMessageResponse(updatedClient.getId(), "Updated client with ID ");
