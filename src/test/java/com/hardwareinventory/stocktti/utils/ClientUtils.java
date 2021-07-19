@@ -1,10 +1,7 @@
 package com.hardwareinventory.stocktti.utils;
 
-
 import com.hardwareinventory.stocktti.dto.request.ClientDTO;
 import com.hardwareinventory.stocktti.entity.Client;
-
-import javax.print.attribute.standard.MediaSize;
 
 
 public class ClientUtils {
